@@ -27,7 +27,7 @@ public class Product {
 	@Column(unique = true,nullable = false) 
 	private String productName;
 	
-	@Column(unique = true,nullable = false)
+	@Column(unique = false,nullable = false)
 	private String productDescription; 
 	
 	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)

@@ -5,6 +5,7 @@ import com.productservice.service.ProductService;
 
 import jakarta.transaction.Transactional;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,12 +19,21 @@ public class ProductController {
 
     @Autowired
     private ProductService productService;
+    
+    
 
-    @PostMapping
+	@PostMapping
     public ResponseEntity<ProductDTO> createProduct(@RequestBody ProductDTO productDTO) {
         ProductDTO savedProduct = productService.saveProduct(productDTO);
         return new ResponseEntity<>(savedProduct, HttpStatus.CREATED);
     }
+    
+//    @PostMapping("/test")
+//    public ResponseEntity<ProductDTO> createProduct1(@RequestBody ProductDTO productDTO) {
+//        ProductDTO savedProduct = productService.saveProduct1(productDTO);
+//        return new ResponseEntity<>(savedProduct, HttpStatus.CREATED);
+//  
+//    }
 
     @GetMapping
     public ResponseEntity<List<ProductDTO>> getAllProducts() {
@@ -47,6 +57,21 @@ public class ProductController {
                 ? new ResponseEntity<>(deletedProductDTO, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+    
+  
+    @GetMapping("/key/{productKey}")
+    public ResponseEntity<ProductDTO> getProductByKey(@PathVariable("productKey") String productKey) {
+        ProductDTO productDto = productService.getProductByKey(productKey);
+        
+        if (productDto != null) {
+            return ResponseEntity.ok(productDto);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    
+    
 
 
 }

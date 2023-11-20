@@ -15,5 +15,9 @@ public interface ProductService {
 
     ProductDTO deleteProduct(Long id);
     
+    ProductDTO getProductByKey(String productKey);
+
+//	ProductDTO saveProduct1(ProductDTO productDTO);
+//    
     
 }

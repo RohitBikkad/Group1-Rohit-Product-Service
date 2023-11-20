@@ -29,24 +29,6 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductDTO saveProduct(ProductDTO productDTO) {
-    	
-
-//        Product product = modelMapper.map(productDTO, Product.class);
-//        
-////        ProductTypeDTO productTypeDTO = new ProductTypeDTO();
-////        productDTO.setProductType(productTypeDTO);
-////        ProductType productType = modelMapper.map(productDTO.getProductType(), ProductType.class);
-////        product.setProductType(productType);
-//        
-//        
-
-//        Product savedProduct = productRepository.save(product);
-//
-
-//        return modelMapper.map(savedProduct, ProductDTO.class);
-        
-        
-//       
 
 
         Product product = modelMapper.map(productDTO, Product.class);
@@ -58,6 +40,17 @@ public class ProductServiceImpl implements ProductService {
 
         return modelMapper.map(savedProduct, ProductDTO.class);
     }
+    
+//    @Override
+//	public ProductDTO saveProduct1(ProductDTO productDTO) {
+//		ProductType productType = productTypeRepository.findByProductTypeKey(productDTO.getProductTypeKey());
+//		
+//		Product product = modelMapper.map(productDTO, Product.class);
+//		
+//		product.setProductType(productType);
+//		Product savedProduct = productRepository.save(product);
+//		return modelMapper.map(savedProduct, ProductDTO.class);
+//	}
 
     @Override
     public ProductDTO getProductById(Long id) {
@@ -86,4 +79,14 @@ public class ProductServiceImpl implements ProductService {
                 })
                 .orElse(null);
     }
+    
+    
+    @Override
+	public ProductDTO getProductByKey(String productKey) {
+		Product product = productRepository.findByProductKey(productKey);
+
+		return modelMapper.map(product, ProductDTO.class);
+	}
+    
+    
 }
