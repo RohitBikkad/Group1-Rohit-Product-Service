@@ -29,4 +29,13 @@ public class ProductVariantController {
         List<ProductVariantDTO> productVariants = productVariantService.getAllProductVariants();
         return new ResponseEntity<>(productVariants, HttpStatus.OK);
     }
+    
+    @GetMapping("/{productVariantId}")
+    public ResponseEntity<ProductVariantDTO> getProductVariantById(@PathVariable Long productVariantId) {
+        ProductVariantDTO productVariantDTO = productVariantService.getProductVariantById(productVariantId);
+        return productVariantDTO != null
+            ? new ResponseEntity<>(productVariantDTO, HttpStatus.OK)
+            : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+    
 }

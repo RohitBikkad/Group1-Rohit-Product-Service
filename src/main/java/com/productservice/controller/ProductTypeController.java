@@ -39,6 +39,13 @@ public class ProductTypeController {
 		ProductTypeDTO savedProductTypeDto = productTypeService.saveProductType(productTypeDto);
 		return new ResponseEntity<>(savedProductTypeDto, HttpStatus.CREATED);
 	}
+	
+	@GetMapping
+	public ResponseEntity<List<ProductType>> getAllProductType() {
+		return ResponseEntity.ok(productTypeService.getAllProductType());
+
+	}
+	
 
 	@GetMapping("/{productTypeKey}")
 	@Transactional
@@ -55,6 +62,16 @@ public class ProductTypeController {
 		return ResponseEntity.ok(productType);
 	}
 	
+	@PutMapping("/{productTypeKey}")
+	public ResponseEntity<ProductTypeDTO> updateProductTypeByKey(@RequestBody ProductTypeDTO productTypeDto,
+														@PathVariable("productTypeKey") String productTypeKey) {
+		ProductTypeDTO updateProductTypeDto = productTypeService.updateProductTypeByKey(productTypeDto,productTypeKey);
+		if (updateProductTypeDto != null) {
+	        return new ResponseEntity<>(updateProductTypeDto, HttpStatus.OK);
+	    } else {
+	        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	    }
+	}
 	
 	
 

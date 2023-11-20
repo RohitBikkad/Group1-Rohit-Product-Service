@@ -38,23 +38,14 @@ public class Product {
 	@OneToOne(cascade = CascadeType.ALL)
     private ProductType productType;
 	
-//	@JoinColumn(name = "master_variant")
-	
-	@OneToOne(cascade = CascadeType.ALL)
-	private ProductVariant masterVariant;
+
 	
 	@OneToMany(cascade = CascadeType.ALL,
 			fetch = FetchType.LAZY,
 			mappedBy = "product")
 	private Set<ProductVariant> variants;
 
-	public ProductVariant getMasterVariant() {
-		return masterVariant;
-	}
-
-	public void setMasterVariant(ProductVariant masterVariant) {
-		this.masterVariant = masterVariant;
-	}
+	
 
 	public ProductType getProductType() {
 		return productType;

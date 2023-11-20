@@ -28,9 +28,7 @@ public class ProductVariant {
 	@JoinColumn(name = "product_id", nullable = false)
 	private Product product;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "master_variant_id")
-    private ProductVariant masterVariant;
+	
 	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "productVariant")
     private Set<Price> price;

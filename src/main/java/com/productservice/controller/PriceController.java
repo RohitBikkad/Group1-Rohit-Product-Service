@@ -36,6 +36,13 @@ public class PriceController {
         List<PriceDTO> priceDTOList = priceService.getAllPrices();
         return new ResponseEntity<>(priceDTOList, HttpStatus.OK);
     }
-
+    
+    @GetMapping("/{priceId}")
+    public ResponseEntity<PriceDTO> getPriceById(@PathVariable Long priceId) {
+        PriceDTO priceDTO = priceService.getPriceById(priceId);
+        return priceDTO != null
+                ? new ResponseEntity<>(priceDTO, HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
 
 }

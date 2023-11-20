@@ -41,6 +41,23 @@ public class ProductCategoryController {
         List<ProductCategoryDTO> categoryDTOList = productCategoryService.getAllCategories();
         return new ResponseEntity<>(categoryDTOList, HttpStatus.OK);
     }
+    
+    @GetMapping("/{id}")
+    public ResponseEntity<ProductCategoryDTO> getCategoryById(@PathVariable Long id) {
+        ProductCategoryDTO categoryDTO = productCategoryService.getCategoryById(id);
+        return categoryDTO != null
+                ? new ResponseEntity<>(categoryDTO, HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+    
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ProductCategoryDTO> deleteCategory(@PathVariable Long id) {
+        ProductCategoryDTO deletedCategoryDTO = productCategoryService.deleteCategory(id);
+        return deletedCategoryDTO != null
+                ? new ResponseEntity<>(deletedCategoryDTO, HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+    
 
     
 }

@@ -2,7 +2,6 @@ package com.productservice.dto;
 
 import java.util.Set;
 
-import com.productservice.entities.ProductVariant;
 
 public class ProductDTO {
 	
@@ -13,16 +12,17 @@ public class ProductDTO {
     private Set<ProductVariantDTO> variants;
     private Set<ProductCategoryDTO> categories;
     private ProductTypeDTO productType;
-    private ProductVariantDTO masterVariant;
+
     
     
 	public ProductDTO() {
 		super();
 	}
 
+
+
 	public ProductDTO(Long id, String productKey, String productName, String productDescription,
-			Set<ProductVariantDTO> variants, Set<ProductCategoryDTO> categories, ProductTypeDTO productType,
-			ProductVariantDTO masterVariant) {
+			Set<ProductVariantDTO> variants, Set<ProductCategoryDTO> categories, ProductTypeDTO productType) {
 		super();
 		this.id = id;
 		this.productKey = productKey;
@@ -31,8 +31,9 @@ public class ProductDTO {
 		this.variants = variants;
 		this.categories = categories;
 		this.productType = productType;
-		this.masterVariant = masterVariant;
 	}
+
+
 
 	public Long getId() {
 		return id;
@@ -89,18 +90,6 @@ public class ProductDTO {
 	public void setProductType(ProductTypeDTO productType) {
 		this.productType = productType;
 	}
-
-	public ProductVariantDTO getMasterVariant() {
-		return masterVariant;
-	}
-
-	public void setMasterVariant(ProductVariantDTO masterVariant) {
-		this.masterVariant = masterVariant;
-	}
-    
 	
 	
-    
-    
-
 }
