@@ -1,5 +1,6 @@
 package com.productservice.dto;
 
+import java.util.Map;
 import java.util.Set;
 
 public class ProductVariantDTO {
@@ -8,9 +9,22 @@ public class ProductVariantDTO {
     private String sku;
     private Long productId;
     private Set<PriceDTO> price;
+    private Map<String, String> attributes;
 
 	
-    public ProductVariantDTO() {
+    public Map<String, String> getAttributes() {
+		return attributes;
+	}
+
+
+
+	public void setAttributes(Map<String, String> attributes) {
+		this.attributes = attributes;
+	}
+
+
+
+	public ProductVariantDTO() {
 		super();
 	}
 
