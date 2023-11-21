@@ -15,16 +15,14 @@ public class PriceController {
 
 	@Autowired
     private PriceService priceService;
-    
-	@Autowired
-	private ModelMapper modelMapper;
 
-    public PriceController(PriceService priceService, ModelMapper modelMapper) {
-        this.priceService = priceService;
-        this.modelMapper = modelMapper;
-    }
+    public PriceController(PriceService priceService) {
+		super();
+		this.priceService = priceService;
+	}
 
-    @PostMapping
+
+	@PostMapping
     public ResponseEntity<PriceDTO> createPrice(@RequestBody PriceDTO priceDTO) {
         PriceDTO createdPrice = priceService.createPrice(priceDTO);
         return new ResponseEntity<>(createdPrice, HttpStatus.CREATED);

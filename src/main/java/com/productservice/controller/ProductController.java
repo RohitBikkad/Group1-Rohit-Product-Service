@@ -1,5 +1,6 @@
 package com.productservice.controller;
 
+import com.productservice.dto.PriceDTO;
 import com.productservice.dto.ProductDTO;
 import com.productservice.service.ProductService;
 
@@ -12,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api/products")
@@ -20,7 +22,7 @@ public class ProductController {
     @Autowired
     private ProductService productService;
     
-    
+
 
 	@PostMapping
     public ResponseEntity<ProductDTO> createProduct(@RequestBody ProductDTO productDTO) {
@@ -28,12 +30,6 @@ public class ProductController {
         return new ResponseEntity<>(savedProduct, HttpStatus.CREATED);
     }
     
-//    @PostMapping("/test")
-//    public ResponseEntity<ProductDTO> createProduct1(@RequestBody ProductDTO productDTO) {
-//        ProductDTO savedProduct = productService.saveProduct1(productDTO);
-//        return new ResponseEntity<>(savedProduct, HttpStatus.CREATED);
-//  
-//    }
 
     @GetMapping
     public ResponseEntity<List<ProductDTO>> getAllProducts() {
@@ -69,9 +65,44 @@ public class ProductController {
             return ResponseEntity.notFound().build();
         }
     }
+    
+    @PutMapping("/{id}")
+    public ResponseEntity<ProductDTO> updateProductById(@PathVariable Long id, @RequestBody ProductDTO updatedProductDTO) {
+        ProductDTO updatedProduct = productService.updateProductById(id, updatedProductDTO);
+        return updatedProduct != null
+                ? new ResponseEntity<>(updatedProduct, HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @PutMapping("/key/{productKey}")
+    public ResponseEntity<ProductDTO> updateProductByKey(@PathVariable String productKey, @RequestBody ProductDTO updatedProductDTO) {
+        ProductDTO updatedProduct = productService.updateProductByKey(productKey, updatedProductDTO);
+        return updatedProduct != null
+                ? new ResponseEntity<>(updatedProduct, HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+    
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    @GetMapping("/{productId}/prices")
+    public ResponseEntity<Set<PriceDTO>> getProductPrices(@PathVariable Long productId) {
+        Set<PriceDTO> prices = productService.getProductPricesByProductId(productId);
+
+        if (!prices.isEmpty()) {
+            return new ResponseEntity<>(prices, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+    
+    
+    
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
     
     
 
 
 }
+

@@ -11,5 +11,7 @@ public interface PriceService {
 
     List<PriceDTO> getAllPrices();
 
+	PriceDTO getProductPrice(Long productVariantId);
+
     
 }

@@ -10,6 +10,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -49,5 +50,16 @@ public class PriceServiceImpl implements PriceService {
                 .collect(Collectors.toList());
     }
 
+	@Override
+	public PriceDTO getProductPrice(Long productVariantId) {
+		// TODO Auto-generated method stub
+		Optional<Price> priceOptional = priceRepository.findByproductVariantId(productVariantId);
+		
+		PriceDTO priceDTO = modelMapper.map(priceOptional.get(), PriceDTO.class);
+        return priceDTO;
+    }
+	
+
 
 }
+
