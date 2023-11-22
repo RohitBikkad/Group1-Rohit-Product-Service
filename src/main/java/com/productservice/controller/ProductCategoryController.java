@@ -43,19 +43,22 @@ public class ProductCategoryController {
     }
     
     @GetMapping("/{id}")
-    public ResponseEntity<ProductCategoryDTO> getCategoryById(@PathVariable Long id) {
+    public ResponseEntity<Object> getCategoryById(@PathVariable Long id) {
         ProductCategoryDTO categoryDTO = productCategoryService.getCategoryById(id);
+        String errorMessage = "ProductCategory not found for ID: " + id;
         return categoryDTO != null
                 ? new ResponseEntity<>(categoryDTO, HttpStatus.OK)
-                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+                : new ResponseEntity<>(errorMessage, HttpStatus.NOT_FOUND);
     }
     
     @DeleteMapping("/{id}")
-    public ResponseEntity<ProductCategoryDTO> deleteCategory(@PathVariable Long id) {
+    public ResponseEntity<Object> deleteCategory(@PathVariable Long id) {
         ProductCategoryDTO deletedCategoryDTO = productCategoryService.deleteCategory(id);
+        String errorMessage = "ProductCategory not found for ID: " + id;
+        
         return deletedCategoryDTO != null
-                ? new ResponseEntity<>(deletedCategoryDTO, HttpStatus.OK)
-                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+                ? new ResponseEntity<>("ProductCategoryDTO deleted successfully!.", HttpStatus.OK)
+                : new ResponseEntity<>(errorMessage, HttpStatus.NOT_FOUND);
     }
     
 

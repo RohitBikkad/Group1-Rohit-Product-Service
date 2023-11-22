@@ -38,20 +38,24 @@ public class ProductController {
     }
     
     @GetMapping("/{id}")
-    public ResponseEntity<ProductDTO> getProductById(@PathVariable Long id) {
+    public ResponseEntity<Object> getProductById(@PathVariable Long id) {
         ProductDTO productDTO = productService.getProductById(id);
+        String errorMessage = "Product not found for id: " + id;
+        
         return productDTO != null
                 ? new ResponseEntity<>(productDTO, HttpStatus.OK)
-                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+                : new ResponseEntity<>(errorMessage, HttpStatus.NOT_FOUND);
     }
     
     @DeleteMapping("/{id}")
     @Transactional
-    public ResponseEntity<ProductDTO> deleteProduct(@PathVariable Long id) {
+    public ResponseEntity<Object> deleteProduct(@PathVariable Long id) {
         ProductDTO deletedProductDTO = productService.deleteProduct(id);
+        String errorMessage = "Product not found for id: " + id;
+        
         return deletedProductDTO != null
-                ? new ResponseEntity<>(deletedProductDTO, HttpStatus.OK)
-                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+                ? new ResponseEntity<>("Product  deleted successfully", HttpStatus.OK)
+                : new ResponseEntity<>(errorMessage, HttpStatus.NOT_FOUND);
     }
     
   
@@ -60,8 +64,9 @@ public class ProductController {
         ProductDTO productDto = productService.getProductByKey(productKey);
         
         if (productDto != null) {
-            return ResponseEntity.ok(productDto);
+        	return new ResponseEntity<>(productDto, HttpStatus.OK);
         } else {
+        	
             return ResponseEntity.notFound().build();
         }
     }
