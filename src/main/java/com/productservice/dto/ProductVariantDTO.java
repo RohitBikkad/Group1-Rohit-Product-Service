@@ -7,7 +7,10 @@ public class ProductVariantDTO {
 
     private Long id;
     private String sku;
-    private Long productId;
+    private String productVariantKey;
+  
+
+	private Long productId;
     private Set<PriceDTO> price;
     private Map<String, String> attributes;
 
@@ -72,7 +75,15 @@ public class ProductVariantDTO {
 		this.price = price;
 	}
 
+	public String getProductVariantKey() {
+		return productVariantKey;
+	}
 
+
+
+	public void setProductVariantKey(String productVariantKey) {
+		this.productVariantKey = productVariantKey;
+	}
     
     
     

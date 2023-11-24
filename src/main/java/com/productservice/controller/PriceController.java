@@ -21,13 +21,11 @@ public class PriceController {
 		this.priceService = priceService;
 	}
 
-
 	@PostMapping
     public ResponseEntity<PriceDTO> createPrice(@RequestBody PriceDTO priceDTO) {
         PriceDTO createdPrice = priceService.createPrice(priceDTO);
         return new ResponseEntity<>(createdPrice, HttpStatus.CREATED);
     }
-
 
     @GetMapping
     public ResponseEntity<List<PriceDTO>> getAllPrices() {
@@ -36,11 +34,12 @@ public class PriceController {
     }
     
     @GetMapping("/{priceId}")
-    public ResponseEntity<PriceDTO> getPriceById(@PathVariable Long priceId) {
+    public ResponseEntity<Object> getPriceById(@PathVariable Long priceId) {
         PriceDTO priceDTO = priceService.getPriceById(priceId);
+        String errorMessage = "Price not found for id: " + priceId;
         return priceDTO != null
                 ? new ResponseEntity<>(priceDTO, HttpStatus.OK)
-                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+                : new ResponseEntity<>(errorMessage, HttpStatus.NOT_FOUND);
     }
 
 }

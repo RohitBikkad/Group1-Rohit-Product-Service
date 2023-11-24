@@ -11,4 +11,6 @@ public interface ProductVariantService {
     ProductVariantDTO getProductVariantById(Long productVariantId);
 
     List<ProductVariantDTO> getAllProductVariants();
+    
+    ProductVariantDTO getProductVariantByKey(String productVariantKey);
 }

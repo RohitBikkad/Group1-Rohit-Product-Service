@@ -55,4 +55,10 @@ public class ProductVariantServiceImpl implements ProductVariantService {
             .map(productVariant -> modelMapper.map(productVariant, ProductVariantDTO.class))
             .collect(Collectors.toList());
     }
+    
+    @Override
+	public ProductVariantDTO getProductVariantByKey(String productVariantKey) {
+		ProductVariant productVariant = productVariantRepository.findByProductVariantKey(productVariantKey);
+		return modelMapper.map(productVariant, ProductVariantDTO.class);
+	}
 }

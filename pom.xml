@@ -11,7 +11,7 @@
 	<groupId>com.product-service</groupId>
 	<artifactId>product-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>product-service</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
@@ -65,12 +65,12 @@
 				<configuration>
 					<image>
 						<builder>paketobuildpacks/builder-jammy-base:latest</builder>
-						<name>Rohit-product-service</name>
+						<name>Group1-Rohit-product-service</name>
 					</image>
 				</configuration>
 			</plugin>
 		</plugins>
-		
+
 	</build>
 
 	<dependencyManagement>

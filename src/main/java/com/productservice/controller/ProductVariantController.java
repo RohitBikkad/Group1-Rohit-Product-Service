@@ -38,4 +38,16 @@ public class ProductVariantController {
             : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
     
+    @GetMapping("/key/{productVariantKey}")
+	public ResponseEntity<Object> getProductVariantByKey(@PathVariable("productVariantKey") String productVariantKey) {
+    
+		ProductVariantDTO productVariantDto = productVariantService.getProductVariantByKey(productVariantKey);
+		
+		return productVariantDto != null
+	            ? new ResponseEntity<>(productVariantDto, HttpStatus.OK)
+	            : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+	}
+    
+    
 }

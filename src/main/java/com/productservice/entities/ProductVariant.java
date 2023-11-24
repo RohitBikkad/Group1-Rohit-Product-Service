@@ -28,6 +28,16 @@ public class ProductVariant {
 	@Column(unique = true)
 	private String sku;
 	
+	private String productVariantKey; 
+	
+	public String getProductVariantKey() {
+		return productVariantKey;
+	}
+
+	public void setProductVariantKey(String productVariantKey) {
+		this.productVariantKey = productVariantKey;
+	}
+
 	@ManyToOne
 	@JoinColumn(name = "product_id", nullable = false)
 	private Product product;
